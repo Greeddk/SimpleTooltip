@@ -8,7 +8,7 @@
 import SwiftUI
 
 @available(iOS 14.0, *)
-extension View {
+public extension View {
     func measureSize(perform action: @escaping (CGSize) -> Void) -> some View {
         self.overlay(
             GeometryReader { geometry in

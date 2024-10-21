@@ -8,20 +8,20 @@
 import SwiftUI
 
 @available(iOS 14.0, *)
-struct TooltipModifierContainer<Content: View>: View {
+public struct TooltipModifierContainer<Content: View>: View {
     let content: Content
     let text: String
     let isShowing: Bool
     var options: TooltipOptions
     
-    init(content: Content, text: String, isShowing: Bool, options: TooltipOptions = TooltipOptions()) {
+    public init(content: Content, text: String, isShowing: Bool, options: TooltipOptions = TooltipOptions()) {
         self.content = content
         self.text = text
         self.isShowing = isShowing
         self.options = options
     }
     
-    var body: some View {
+    public var body: some View {
         content.modifier(TooltipModifier(text: text, isShowing: isShowing, options: options))
     }
     
