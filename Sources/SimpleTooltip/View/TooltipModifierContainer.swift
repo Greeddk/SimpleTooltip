@@ -15,11 +15,11 @@ public struct TooltipContainer<Content: View>: View {
     var options: TooltipOptions
     @State private var size: CGSize = .zero
     
-    public init(content: Content, text: String, isShowing: Bool, options: TooltipOptions = TooltipOptions()) {
+    public init(content: Content, text: String, isShowing: Bool) {
         self.content = content
         self.text = text
         self.isShowing = isShowing
-        self.options = options
+        self.options = TooltipOptions()
     }
     
     public var body: some View {
