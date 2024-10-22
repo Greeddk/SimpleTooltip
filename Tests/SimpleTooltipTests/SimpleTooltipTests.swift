@@ -4,14 +4,12 @@ import SwiftUI
 
 @available(iOS 14.0, *)
 final class ToolTipTests: XCTestCase {
-    
     func testToolTipCreation() {
         let text = "Test Tooltip"
         let isShowing = true
-        let options = TooltipOptions(backgroundColor: .blue, textColor: .white, position: .topCenter)
         
         let button = Button("Test") {}
-        let tooltipView = button.tooltip(text, isShowing: isShowing, options: options)
+        let tooltipView = button.tooltip(text, isShowing: isShowing)
         
         XCTAssertNotNil(tooltipView)
     }
@@ -19,17 +17,16 @@ final class ToolTipTests: XCTestCase {
     func testToolTipOptions() {
         let text = "Test Tooltip"
         let isShowing = true
-        let initialOptions = TooltipOptions()
         
         let button = Button("Test") {}
-        let tooltipView = button.tooltip(text, isShowing: isShowing, options: initialOptions)
+        let tooltipView = button.tooltip(text, isShowing: isShowing)
             .tooltipBackgroundColor(.red)
             .tooltipTextColor(.green)
-            .tooltipAlignment(.bottomLeft)
+            .tooltipArrowPosition(.bottomLeft)
             .tooltipOffset(CGSize(width: 10, height: 10))
             .tooltipZIndex(5)
         
-        let container = tooltipView as TooltipModifierContainer<Button<Text>>
+        let container = tooltipView as TooltipContainer<Button<Text>>
         XCTAssertEqual(container.options.backgroundColor, .red)
         XCTAssertEqual(container.options.textColor, .green)
         XCTAssertEqual(container.options.position, .bottomLeft)
