@@ -8,11 +8,12 @@
 import SwiftUI
 
 @available(iOS 14.0, *)
-public struct TooltipModifierContainer<Content: View>: View {
+public struct TooltipContainer<Content: View>: View {
     let content: Content
     let text: String
     let isShowing: Bool
     var options: TooltipOptions
+    @State private var size: CGSize = .zero
     
     public init(content: Content, text: String, isShowing: Bool, options: TooltipOptions = TooltipOptions()) {
         self.content = content
@@ -22,34 +23,90 @@ public struct TooltipModifierContainer<Content: View>: View {
     }
     
     public var body: some View {
-        content.modifier(TooltipModifier(text: text, isShowing: isShowing, options: options))
+        content
+            .overlay(
+                Group {
+                    if isShowing {
+                        GeometryReader { geometry in
+                            TooltipView(
+                                text: text,
+                                backgroundColor: options.backgroundColor,
+                                textColor: options.textColor,
+                                position: options.position,
+                                maxWidth: getMaxWidth(geometry)
+                            )
+                            .fixedSize()
+                            .measureSize { size = $0 }
+                            .position(getToolTipPosition(geometry))
+                            .offset(options.offset)
+                        }
+                    }
+                }
+            )
+            .zIndex(options.zIndex)
     }
     
-    public func tooltipBackgroundColor(_ color: Color) -> TooltipModifierContainer {
+    private func getMaxWidth(_ geometry: GeometryProxy) -> CGFloat {
+        let screenWidth = UIScreen.main.bounds.width
+        let viewFrame = geometry.frame(in: .global)
+        let leftSpace = viewFrame.minX
+        let rightSpace = screenWidth - viewFrame.maxX
+        
+        switch options.position {
+        case .topLeft, .bottomLeft:
+            return min(screenWidth - leftSpace - 20, 300)
+        case .topRight, .bottomRight:
+            return min(screenWidth - rightSpace - 20, 300)
+        case .topCenter, .bottomCenter:
+            return min(screenWidth - 40, 300)
+        }
+    }
+    
+    private func getToolTipPosition(_ geometry: GeometryProxy) -> CGPoint {
+        let viewWidth = geometry.size.width
+        let viewHeight = geometry.size.height
+        
+        switch options.position {
+        case .bottomLeft:
+            return CGPoint(x: size.width / 2, y: -size.height / 2 - 5)
+        case .bottomRight:
+            return CGPoint(x: viewWidth - size.width / 2, y: -size.height / 2 - 5)
+        case .bottomCenter:
+            return CGPoint(x: viewWidth / 2, y: -size.height / 2 - 5)
+        case .topLeft:
+            return CGPoint(x: size.width / 2, y: viewHeight + size.height / 2 + 5)
+        case .topRight:
+            return CGPoint(x: viewWidth - size.width / 2, y: viewHeight + size.height / 2 + 5)
+        case .topCenter:
+            return CGPoint(x: viewWidth / 2, y: viewHeight + size.height / 2 + 5)
+        }
+    }
+    
+    public func tooltipBackgroundColor(_ color: Color) -> TooltipContainer {
         var newContainer = self
         newContainer.options.backgroundColor = color
         return newContainer
     }
     
-    public func tooltipTextColor(_ color: Color) -> TooltipModifierContainer {
+    public func tooltipTextColor(_ color: Color) -> TooltipContainer {
         var newContainer = self
         newContainer.options.textColor = color
         return newContainer
     }
     
-    public func tooltipAlignment(_ position: TrianglePosition) -> TooltipModifierContainer {
+    public func tooltipAlignment(_ position: TrianglePosition) -> TooltipContainer {
         var newContainer = self
         newContainer.options.position = position
         return newContainer
     }
     
-    public func tooltipOffset(_ offset: CGSize) -> TooltipModifierContainer {
+    public func tooltipOffset(_ offset: CGSize) -> TooltipContainer {
         var newContainer = self
         newContainer.options.offset = offset
         return newContainer
     }
     
-    public func tooltipZIndex(_ zIndex: Double) -> TooltipModifierContainer {
+    public func tooltipZIndex(_ zIndex: Double) -> TooltipContainer {
         var newContainer = self
         newContainer.options.zIndex = zIndex
         return newContainer

@@ -23,7 +23,7 @@ public extension View {
         )
     }
     
-    func tooltip(_ text: String, isShowing: Bool, options: TooltipOptions = TooltipOptions()) -> TooltipModifierContainer<Self> {
-        TooltipModifierContainer(content: self, text: text, isShowing: isShowing, options: options)
+    func tooltip(_ text: String, isShowing: Bool, options: TooltipOptions = TooltipOptions()) -> TooltipContainer<Self> {
+        TooltipContainer(content: self, text: text, isShowing: isShowing, options: options)
     }
 }
