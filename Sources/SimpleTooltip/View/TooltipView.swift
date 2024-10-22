@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum TrianglePosition {
+public enum TrianglePosition {
     case topLeft
     case topRight
     case topCenter
