@@ -94,7 +94,7 @@ public struct TooltipContainer<Content: View>: View {
         return newContainer
     }
     
-    public func tooltipAlignment(_ position: TrianglePosition) -> TooltipContainer {
+    public func tooltipArrowPosition(_ position: TrianglePosition) -> TooltipContainer {
         var newContainer = self
         newContainer.options.position = position
         return newContainer
