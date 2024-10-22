@@ -1,6 +1,6 @@
 # SimpleTooltip
 
-A lightweight, customizable tooltip library for SwiftUI. Easily add tooltips to any SwiftUI view with customizable arrow positions, colors, and animations.
+A lightweight, customizable tooltip library for SwiftUI. Easily add tooltips to any SwiftUI view with customizable arrow positions, colors and offset.
 
 ![Minimum iOS Version](https://img.shields.io/badge/iOS-14.0%2B-blue)
 ![Swift Package Manager](https://img.shields.io/badge/SPM-compatible-brightgreen)
