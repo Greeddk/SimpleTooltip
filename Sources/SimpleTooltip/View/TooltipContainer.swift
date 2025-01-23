@@ -32,8 +32,7 @@ public struct TooltipContainer<Content: View>: View {
                                 text: text,
                                 backgroundColor: options.backgroundColor,
                                 textColor: options.textColor,
-                                position: options.position,
-                                maxWidth: getMaxWidth(geometry)
+                                position: options.position
                             )
                             .fixedSize()
                             .measureSize { size = $0 }
@@ -44,22 +43,6 @@ public struct TooltipContainer<Content: View>: View {
                 }
             )
             .zIndex(options.zIndex)
-    }
-    
-    private func getMaxWidth(_ geometry: GeometryProxy) -> CGFloat {
-        let screenWidth = UIScreen.main.bounds.width
-        let viewFrame = geometry.frame(in: .global)
-        let leftSpace = viewFrame.minX
-        let rightSpace = screenWidth - viewFrame.maxX
-        
-        switch options.position {
-        case .topLeft, .bottomLeft:
-            return min(screenWidth - leftSpace - 20, 300)
-        case .topRight, .bottomRight:
-            return min(screenWidth - rightSpace - 20, 300)
-        case .topCenter, .bottomCenter:
-            return min(screenWidth - 40, 300)
-        }
     }
     
     private func getToolTipPosition(_ geometry: GeometryProxy) -> CGPoint {

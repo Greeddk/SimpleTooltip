@@ -22,7 +22,6 @@ struct TooltipView: View {
     let backgroundColor: Color
     let textColor: Color
     let position: TrianglePosition
-    let maxWidth: CGFloat
     
     var body: some View {
         VStack(alignment: horizontalAlignment, spacing: -6) {
@@ -53,7 +52,6 @@ struct TooltipView: View {
             .foregroundColor(textColor)
             .font(.system(size: 14, weight: .semibold))
             .padding(8)
-            .frame(maxWidth: maxWidth)
             .background(backgroundColor)
             .cornerRadius(8)
     }
