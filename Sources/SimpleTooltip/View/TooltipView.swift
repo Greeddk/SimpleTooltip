@@ -42,7 +42,7 @@ public struct TooltipView: View {
         }
     }
     
-    private var horizontalAlignment: HorizontalAlignment {
+    public var horizontalAlignment: HorizontalAlignment {
         switch position {
         case .topLeft, .bottomLeft:
             return .leading
@@ -53,7 +53,7 @@ public struct TooltipView: View {
         }
     }
     
-    private var tooltipContent: some View {
+    public var tooltipContent: some View {
         Text(text)
             .multilineTextAlignment(.center)
             .foregroundColor(textColor)
@@ -63,7 +63,7 @@ public struct TooltipView: View {
             .cornerRadius(8)
     }
     
-    private var tooltipTriangle: some View {
+    public var tooltipTriangle: some View {
         Triangle(pointingUp: position == .topLeft || position == .topRight || position == .topCenter)
             .fill(backgroundColor)
             .frame(width: 20, height: 15)
