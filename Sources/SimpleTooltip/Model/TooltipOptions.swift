@@ -9,11 +9,11 @@ import SwiftUI
 
 @available(iOS 14.0, *)
 public struct TooltipOptions {
-    var backgroundColor: Color = .white
-    var textColor: Color = .black
-    var position: TrianglePosition = .topCenter
-    var offset: CGSize = .zero
-    var zIndex: Double = 1
+    public var backgroundColor: Color = .white
+    public var textColor: Color = .black
+    public var position: TrianglePosition = .topCenter
+    public var offset: CGSize = .zero
+    public var zIndex: Double = 1
     
     public init() {}
 }

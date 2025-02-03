@@ -83,9 +83,9 @@ public struct TooltipContainer<Content: View>: View {
         return newContainer
     }
     
-    public func tooltipOffset(_ offset: CGSize) -> TooltipContainer {
+    public func tooltipOffset(x: Int, y: Int) -> TooltipContainer {
         var newContainer = self
-        newContainer.options.offset = offset
+        newContainer.options.offset = CGSize(width: x, height: y)
         return newContainer
     }
     
