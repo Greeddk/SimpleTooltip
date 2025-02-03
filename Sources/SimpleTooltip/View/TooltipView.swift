@@ -17,13 +17,13 @@ public enum TrianglePosition {
 }
 
 @available(iOS 14.0, *)
-struct TooltipView: View {
-    let text: String
-    let backgroundColor: Color
-    let textColor: Color
-    let position: TrianglePosition
+public struct TooltipView: View {
+    public let text: String
+    public let backgroundColor: Color
+    public let textColor: Color
+    public let position: TrianglePosition
     
-    var body: some View {
+    public var body: some View {
         VStack(alignment: horizontalAlignment, spacing: -6) {
             if position == .bottomLeft || position == .bottomRight || position == .bottomCenter {
                 tooltipContent
