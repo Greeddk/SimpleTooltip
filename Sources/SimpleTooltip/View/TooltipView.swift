@@ -23,6 +23,13 @@ public struct TooltipView: View {
     public let textColor: Color
     public let position: TrianglePosition
     
+    public init(text: String, backgroundColor: Color, textColor: Color, position: TrianglePosition) {
+        self.text = text
+        self.backgroundColor = backgroundColor
+        self.textColor = textColor
+        self.position = position
+    }
+    
     public var body: some View {
         VStack(alignment: horizontalAlignment, spacing: -6) {
             if position == .bottomLeft || position == .bottomRight || position == .bottomCenter {
